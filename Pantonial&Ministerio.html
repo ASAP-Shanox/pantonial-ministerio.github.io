@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+    <title>Pantonial & Ministerio Portfolio</title>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo" data-aos="zoom-in" data-aos-duration="1000">
+                <span>Sean & Kerve</span>
+            </div>
+            <div class="links">
+                <div class="link" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100"><a href="#">Home</a></div>
+                <div class="link" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200"><a href="#" onclick="toggleAboutSection()">About</a></div>
+                <div class="link" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
+                    <a href="https://www.google.com/maps/place/W3Schools,+R%C3%A5dhusgata+6,+4306+Sandnes,+Norway/@58.8538717,5.7425322,16z/data=!4m6!3m5!1s0x463a37bfa9bfc631:0xadc244dd6a468008!8m2!3d58.8538717!4d5.7425322!16s%2Fg%2F11tk930_km" target="_blank">Location</a>
+                </div>
+                <div class="link" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400"><a href="#">Blogs</a></div>
+                <div class="link" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="500">
+                    <a href="https://youtube.com/playlist?list=PLP9IO4UYNF0VdAajP_5pYG-jG2JRrG72s&si=3Z779dfqGdJUpuM0" target="_blank">YouTube Playlist</a>
+                </div>
+                <div class="link contact-btn" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600"><a href="#">Contact Us</a></div>
+            </div>
+            <i class="fa-solid fa-bars hamburg" onclick="hamburg()"></i>
+        </div>
+        <div class="dropdown">
+            <div class="links">
+                <a href="">Home</a>
+                <a href="" onclick="toggleAboutSection()">About</a>
+                <a href="https://www.google.com/maps/place/W3Schools,+R%C3%A5dhusgata+6,+4306+Sandnes,+Norway/@58.8538717,5.7425322,16z/data=!4m6!3m5!1s0x463a37bfa9bfc631:0xadc244dd6a468008!8m2!3d58.8538717!4d5.7425322!16s%2Fg%2F11tk930_km" target="_blank">Location</a>
+                <a href="">Blogs</a>
+                <a href="https://youtube.com/playlist?list=PLP9IO4UYNF0VdAajP_5pYG-jG2JRrG72s&si=3Z779dfqGdJUpuM0" target="_blank">YouTube Playlist</a>
+                <a href="">Contact Us</a>
+                <i class="fa-solid fa-xmark cancel" onclick="cancel()"></i>
+            </div>
+        </div>
+    </nav>
+    <section>
+        <div class="main-container">
+            <div class="image" data-aos="zoom-in-right" data-aos-duration="2500">
+                <img src="main.png" alt="">
+            </div>
+            <div class="content">
+                <h1 data-aos="fade-left" data-aos-duration="1000" data-aos-delay="800">Hey we're <span>Sean & Kerve</span></h1>
+                <div class="typewriter" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="900">We're <span></span></div>
+                <p data-aos="flip-up" data-aos-duration="1000" data-aos-delay="1000">We are students studying in Information Technology at Cebu Eastern Colleges Inc. and this is an introduction on how to make a personal portfolio using HTML and CSS 😊</p>
+                <div class="social-links" data-aos="flip-down" data-aos-duration="1000" data-aos-delay="1200">
+                    <a href="https://github.com/ASAP-Shanox" target="_blank"><i class="fa-brands fa-github"></i></a>
+                    <a href="https://www.facebook.com/spantonial" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="https://www.facebook.com/kervs.qtie" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                </div>
+                <div class="btn" data-aos="zoom-out-left" data-aos-duration="1000" data-aos-delay="1300">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <div class="about-section" id="aboutSection">
+        <h2>About W3Schools</h2>
+        <p>W3Schools is a popular online educational website that provides free tutorials and references for learning web development technologies. Here's a breakdown of what it offers:</p>
+        <ul>
+            <li>Focus on Web Technologies:
+                <ul>
+                    <li>It covers a wide range of programming languages and web development technologies, including HTML, CSS, JavaScript, Python, SQL, and more.</li>
+                </ul>
+            </li>
+            <li>Tutorials and Examples:
+                <ul>
+                    <li>W3Schools provides easy-to-understand tutorials with practical code examples, making it accessible for beginners.</li>
+                </ul>
+            </li>
+            <li>"Try It" Editor:
+                <ul>
+                    <li>A key feature is its "Try It" editor, which allows users to modify and run code examples directly in their web browser.</li>
+                </ul>
+            </li>
+            <li>Freemium Model:
+                <ul>
+                    <li>While most of its content is available for free, W3Schools also offers a paid "PRO" version that removes ads and provides additional features.</li>
+                </ul>
+            </li>
+            <li>Not Affiliated with W3C:
+                <ul>
+                    <li>It's important to note that although it shares a similar name, W3Schools is not affiliated with the World Wide Web Consortium (W3C), the international standards organization for the World Wide Web.</li>
+                </ul>
+            </li>
+        </ul>
+        <p>In essence, W3Schools serves as a valuable resource for anyone looking to learn or enhance their web development skills.</p>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init({offset:0});
+
+      function toggleAboutSection() {
+          const aboutSection = document.getElementById('aboutSection');
+          if (aboutSection.style.display === 'none' || aboutSection.style.display === '') {
+              aboutSection.style.display = 'block';
+          } else {
+              aboutSection.style.display = 'none';
+          }
+      }
+    </script>
+    <script>
+        function hamburg(){
+            const navbar = document.querySelector(".dropdown")
+            navbar.style.transform = "translateY(0px)"
+        }
+        function cancel(){
+            const navbar = document.querySelector(".dropdown")
+            navbar.style.transform = "translateY(-500px)"
+        }
+    </script>
+</body>
+</html>
