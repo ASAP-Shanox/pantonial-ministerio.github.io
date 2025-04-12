@@ -4,118 +4,953 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
-    <title>Pantonial & Ministerio Portfolio</title>
+    <title>Sean & Kerve | IT Students Blog</title>
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Expandable content styles */
+        .post-card .full-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+            padding: 0 15px;
+        }
+
+        .post-card.expanded .full-content {
+            max-height: 10000px;
+            transition: max-height 0.8s ease-in;
+            padding: 15px;
+            background-color: rgba(0, 24, 167, 0.05);
+            border-radius: 0 0 10px 10px;
+            margin-top: 10px;
+        }
+
+        .read-more-btn {
+            background: none;
+            border: none;
+            color: #0018a7;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 10px 0;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .read-more-btn i {
+            margin-left: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .post-card.expanded .read-more-btn i {
+            transform: rotate(180deg);
+        }
+
+        /* Content styling */
+        .full-content h3 {
+            color: #0018a7;
+            margin: 25px 0 15px;
+            font-size: 1.3rem;
+            border-bottom: 2px solid #0018a7;
+            padding-bottom: 5px;
+        }
+
+        .full-content h4 {
+            color: #0030ff;
+            margin: 20px 0 10px;
+            font-size: 1.1rem;
+        }
+
+        .full-content p {
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+
+        .full-content ul {
+            margin-bottom: 20px;
+            padding-left: 25px;
+        }
+
+        .full-content li {
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .full-content li:before {
+            content: "•";
+            color: #0018a7;
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+
+        .highlight-box {
+            background-color: #e6f2ff;
+            border-left: 4px solid #4d94ff;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .highlight-box strong {
+            color: #0018a7;
+        }
+
+        @media (max-width: 768px) {
+            .full-content h3 {
+                font-size: 1.2rem;
+            }
+
+            .full-content h4 {
+                font-size: 1rem;
+            }
+
+            .full-content p, .full-content li {
+                font-size: 0.95rem;
+            }
+        }
+
+        /* Styles for the new section */
+        .hidden-section {
+            display: none;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .hidden-section h2 {
+            margin-bottom: 20px;
+            color: #0018a7;
+        }
+
+        .hidden-section p, .hidden-section ul, .hidden-section code {
+            margin-bottom: 20px;
+        }
+
+        .hidden-section code {
+            background-color: #f5f7fa;
+            border-left: 4px solid #0018a7;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+
+        .hidden-section ul {
+            padding-left: 25px;
+        }
+
+        .hidden-section ul li {
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
     <nav>
         <div class="nav-container">
             <div class="logo" data-aos="zoom-in" data-aos-duration="1000">
                 <span>Sean & Kerve</span>
+                <p class="tagline">IT Students & Bloggers</p>
             </div>
             <div class="links">
                 <div class="link" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100"><a href="#">Home</a></div>
-                <div class="link" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200"><a href="#" onclick="toggleAboutSection()">About</a></div>
-                <div class="link" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
-                    <a href="https://www.google.com/maps/place/W3Schools,+R%C3%A5dhusgata+6,+4306+Sandnes,+Norway/@58.8538717,5.7425322,16z/data=!4m6!3m5!1s0x463a37bfa9bfc631:0xadc244dd6a468008!8m2!3d58.8538717!4d5.7425322!16s%2Fg%2F11tk930_km" target="_blank">Location</a>
-                </div>
-                <div class="link" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400"><a href="#">Blogs</a></div>
-                <div class="link" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="500">
-                    <a href="https://youtube.com/playlist?list=PLP9IO4UYNF0VdAajP_5pYG-jG2JRrG72s&si=3Z779dfqGdJUpuM0" target="_blank">YouTube Playlist</a>
-                </div>
-                <div class="link contact-btn" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600"><a href="#">Contact Us</a></div>
+                <div class="link" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200"><a href="#">About</a></div>
+                <div class="link" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300"><a href="#">Blog</a></div>
+                <div class="link" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400"><a href="#">Resources</a></div>
+                <div class="link contact-btn" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="500"><a href="#" onclick="showContactInfo()">Contact</a></div>
             </div>
             <i class="fa-solid fa-bars hamburg" onclick="hamburg()"></i>
         </div>
         <div class="dropdown">
             <div class="links">
-                <a href="">Home</a>
-                <a href="" onclick="toggleAboutSection()">About</a>
-                <a href="https://www.google.com/maps/place/W3Schools,+R%C3%A5dhusgata+6,+4306+Sandnes,+Norway/@58.8538717,5.7425322,16z/data=!4m6!3m5!1s0x463a37bfa9bfc631:0xadc244dd6a468008!8m2!3d58.8538717!4d5.7425322!16s%2Fg%2F11tk930_km" target="_blank">Location</a>
-                <a href="">Blogs</a>
-                <a href="https://youtube.com/playlist?list=PLP9IO4UYNF0VdAajP_5pYG-jG2JRrG72s&si=3Z779dfqGdJUpuM0" target="_blank">YouTube Playlist</a>
-                <a href="">Contact Us</a>
+                <a href="#">Home</a>
+                <a href="#">About</a>
+                <a href="#">Blog</a>
+                <a href="#">Resources</a>
+                <a href="#" onclick="showContactInfo()">Contact</a>
                 <i class="fa-solid fa-xmark cancel" onclick="cancel()"></i>
             </div>
         </div>
     </nav>
-    <section>
-        <div class="main-container">
-            <div class="image" data-aos="zoom-in-right" data-aos-duration="2500">
-                <img src="main.png" alt="">
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1 data-aos="fade-up">Welcome to Our Tech Journey</h1>
+                <p data-aos="fade-up" data-aos-delay="100">Two IT students sharing our learning experiences, projects, and school life</p>
+                <a href="#" class="btn" data-aos="fade-up" data-aos-delay="200" onclick="showHiddenSection()">Read Our Latest Post</a>
             </div>
-            <div class="content">
-                <h1 data-aos="fade-left" data-aos-duration="1000" data-aos-delay="800">Hey we're <span>Sean & Kerve</span></h1>
-                <div class="typewriter" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="900">We're <span></span></div>
-                <p data-aos="flip-up" data-aos-duration="1000" data-aos-delay="1000">We are students studying in Information Technology at Cebu Eastern Colleges Inc. and this is an introduction on how to make a personal portfolio using HTML and CSS 😊</p>
-                <div class="social-links" data-aos="flip-down" data-aos-duration="1000" data-aos-delay="1200">
-                    <a href="https://github.com/ASAP-Shanox" target="_blank"><i class="fa-brands fa-github"></i></a>
-                    <a href="https://www.facebook.com/spantonial" target="_blank"><i class="fa-brands fa-facebook"></i></a>
-                    <a href="https://www.facebook.com/kervs.qtie" target="_blank"><i class="fa-brands fa-facebook"></i></a>
-                </div>
-                <div class="btn" data-aos="zoom-out-left" data-aos-duration="1000" data-aos-delay="1300">
-                </div>
+            <div class="hero-image" data-aos="fade-left">
+                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Coding">
+            </div>
+        </section>
+
+        <section class="hidden-section" id="hidden-section">
+            <h2>Creating a Personal Blog Using HTML and CSS</h2>
+            <p>Creating a personal blog using only HTML and CSS will result in a <strong>static website</strong>. This means that every blog post will be a separate HTML file, and you'll need to manually create and update each one. There won't be dynamic features like user comments, search functionality, or a database to manage posts.</p>
+            <p>However, it's a great way to learn the fundamentals of web structure and styling. Here's a step-by-step guide:</p>
+
+            <h3>1. Planning Your Blog Structure:</h3>
+            <ul>
+                <li><strong>Homepage (`index.html`):</strong> This will be the main page, listing your latest blog posts with brief summaries and links to the full posts.</li>
+                <li><strong>Individual Blog Post Pages (`post1.html`, `post2.html`, etc.):</strong> Each blog post will have its own dedicated HTML file.</li>
+                <li><strong>CSS File (`style.css`):</strong> This file will contain all the styling rules for your blog.</li>
+            </ul>
+
+            <h3>2. Setting Up Your Project Folder:</h3>
+            <p>Create a folder on your computer to organize your blog files. Inside this folder, create:</p>
+            <ul>
+                <li>`index.html` (for your homepage)</li>
+                <li>A subfolder named `posts` (to store individual blog post HTML files)</li>
+                <li>`style.css` (for your CSS)</li>
+                <li>An optional folder named `images` (to store any images you'll use)</li>
+            </ul>
+
+            <h3>3. Creating the Homepage (`index.html`):</h3>
+            <code>
+                &lt;!DOCTYPE html&gt;<br>
+                &lt;html lang="en"&gt;<br>
+                &lt;head&gt;<br>
+                &nbsp;&nbsp;&lt;meta charset="UTF-8"&gt;<br>
+                &nbsp;&nbsp;&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;<br>
+                &nbsp;&nbsp;&lt;title&gt;My Personal Blog&lt;/title&gt;<br>
+                &nbsp;&nbsp;&lt;link rel="stylesheet" href="style.css"&gt;<br>
+                &lt;/head&gt;<br>
+                &lt;body&gt;<br>
+                &nbsp;&nbsp;&lt;header&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&lt;h1&gt;My Awesome Blog&lt;/h1&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;Sharing my thoughts and experiences.&lt;/p&gt;<br>
+                &nbsp;&nbsp;&lt;/header&gt;<br>
+                &nbsp;&nbsp;&lt;main&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&lt;section class="latest-posts"&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h2&gt;Latest Posts&lt;/h2&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;article class="post-summary"&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h3&gt;&lt;a href="posts/first-post.html"&gt;My First Blog Post&lt;/a&gt;&lt;/h3&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p class="post-meta"&gt;Published on April 12, 2025&lt;/p&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;A brief summary of my first blog post. This might include the first few sentences to give readers an idea of what it's about. &lt;a href="posts/first-post.html"&gt;Read more&lt;/a&gt;&lt;/p&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/article&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;article class="post-summary"&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h3&gt;&lt;a href="posts/second-post.html"&gt;Another Interesting Topic&lt;/a&gt;&lt;/h3&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p class="post-meta"&gt;Published on April 10, 2025&lt;/p&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;A short preview of my second blog entry. Engage your readers with a compelling snippet. &lt;a href="posts/second-post.html"&gt;Read more&lt;/a&gt;&lt;/p&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/article&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&lt;/section&gt;<br>
+                &nbsp;&nbsp;&lt;/main&gt;<br>
+                &nbsp;&nbsp;&lt;footer&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;&copy; 2025 My Personal Blog&lt;/p&gt;<br>
+                &nbsp;&nbsp;&lt;/footer&gt;<br>
+                &lt;/body&gt;<br>
+                &lt;/html&gt;
+            </code>
+
+            <h3>4. Creating Individual Blog Post Pages (e.g., `posts/first-post.html`):</h3>
+            <code>
+                &lt;!DOCTYPE html&gt;<br>
+                &lt;html lang="en"&gt;<br>
+                &lt;head&gt;<br>
+                &nbsp;&nbsp;&lt;meta charset="UTF-8"&gt;<br>
+                &nbsp;&nbsp;&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;<br>
+                &nbsp;&nbsp;&lt;title&gt;My First Blog Post - My Personal Blog&lt;/title&gt;<br>
+                &nbsp;&nbsp;&lt;link rel="stylesheet" href="../style.css"&gt;<br>
+                &lt;/head&gt;<br>
+                &lt;body&gt;<br>
+                &nbsp;&nbsp;&lt;header&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&lt;h1&gt;My Awesome Blog&lt;/h1&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;&lt;a href="../index.html"&gt;Back to Homepage&lt;/a&gt;&lt;/p&gt;<br>
+                &nbsp;&nbsp;&lt;/header&gt;<br>
+                &nbsp;&nbsp;&lt;main class="post-content"&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&lt;article&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h2&gt;My First Blog Post&lt;/h2&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p class="post-meta"&gt;Published on April 12, 2025&lt;/p&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;This is the full content of my very first blog post! Here, I can share detailed thoughts, experiences, and insights on a particular topic.&lt;/p&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;I can also include multiple paragraphs, lists:&lt;/p&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;ul&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;Point 1&lt;/li&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;Point 2&lt;/li&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;Point 3&lt;/li&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/ul&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;And even images:&lt;/p&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;img src="../images/example.jpg" alt="An example image"&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h3&gt;A Subheading&lt;/h3&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;More detailed information under a subheading.&lt;/p&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&lt;/article&gt;<br>
+                &nbsp;&nbsp;&lt;/main&gt;<br>
+                &nbsp;&nbsp;&lt;footer&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;&copy; 2025 My Personal Blog&lt;/p&gt;<br>
+                &nbsp;&nbsp;&lt;/footer&gt;<br>
+                &lt;/body&gt;<br>
+                &lt;/html&gt;
+            </code>
+
+            <h3>5. Creating the CSS File (`style.css`):</h3>
+            <code>
+                /* Basic Reset */<br>
+                body, h1, h2, h3, p, ul, li {<br>
+                &nbsp;&nbsp;margin: 0;<br>
+                &nbsp;&nbsp;padding: 0;<br>
+                &nbsp;&nbsp;border: 0;<br>
+                }<br><br>
+
+                body {<br>
+                &nbsp;&nbsp;font-family: sans-serif;<br>
+                &nbsp;&nbsp;line-height: 1.6;<br>
+                &nbsp;&nbsp;background-color: #f4f4f4;<br>
+                &nbsp;&nbsp;color: #333;<br>
+                }<br><br>
+
+                header {<br>
+                &nbsp;&nbsp;background-color: #333;<br>
+                &nbsp;&nbsp;color: #fff;<br>
+                &nbsp;&nbsp;padding: 20px;<br>
+                &nbsp;&nbsp;text-align: center;<br>
+                }<br><br>
+
+                header h1 {<br>
+                &nbsp;&nbsp;margin-bottom: 5px;<br>
+                }<br><br>
+
+                main {<br>
+                &nbsp;&nbsp;padding: 20px;<br>
+                }<br><br>
+
+                .latest-posts {<br>
+                &nbsp;&nbsp;margin-bottom: 30px;<br>
+                }<br><br>
+
+                .post-summary {<br>
+                &nbsp;&nbsp;background-color: #fff;<br>
+                &nbsp;&nbsp;padding: 15px;<br>
+                &nbsp;&nbsp;margin-bottom: 15px;<br>
+                &nbsp;&nbsp;border: 1px solid #ddd;<br>
+                &nbsp;&nbsp;border-radius: 5px;<br>
+                }<br><br>
+
+                .post-summary h3 a {<br>
+                &nbsp;&nbsp;color: #007bff;<br>
+                &nbsp;&nbsp;text-decoration: none;<br>
+                }<br><br>
+
+                .post-summary h3 a:hover {<br>
+                &nbsp;&nbsp;text-decoration: underline;<br>
+                }<br><br>
+
+                .post-meta {<br>
+                &nbsp;&nbsp;color: #777;<br>
+                &nbsp;&nbsp;font-size: 0.9em;<br>
+                &nbsp;&nbsp;margin-bottom: 10px;<br>
+                }<br><br>
+
+                .post-content {<br>
+                &nbsp;&nbsp;background-color: #fff;<br>
+                &nbsp;&nbsp;padding: 20px;<br>
+                &nbsp;&nbsp;border: 1px solid #ddd;<br>
+                &nbsp;&nbsp;border-radius: 5px;<br>
+                }<br><br>
+
+                .post-content h2 {<br>
+                &nbsp;&nbsp;margin-bottom: 15px;<br>
+                &nbsp;&nbsp;color: #333;<br>
+                }<br><br>
+
+                .post-content h3 {<br>
+                &nbsp;&nbsp;margin-top: 20px;<br>
+                &nbsp;&nbsp;margin-bottom: 10px;<br>
+                &nbsp;&nbsp;color: #555;<br>
+                }<br><br>
+
+                .post-content p {<br>
+                &nbsp;&nbsp;margin-bottom: 15px;<br>
+                }<br><br>
+
+                .post-content ul {<br>
+                &nbsp;&nbsp;margin-left: 20px;<br>
+                &nbsp;&nbsp;margin-bottom: 15px;<br>
+                }<br><br>
+
+                .post-content li {<br>
+                &nbsp;&nbsp;margin-bottom: 5px;<br>
+                }<br><br>
+
+                .post-content img {<br>
+                &nbsp;&nbsp;max-width: 100%;<br>
+                &nbsp;&nbsp;height: auto;<br>
+                &nbsp;&nbsp;display: block;<br>
+                &nbsp;&nbsp;margin: 15px auto;<br>
+                }<br><br>
+
+                footer {<br>
+                &nbsp;&nbsp;text-align: center;<br>
+                &nbsp;&nbsp;padding: 10px;<br>
+                &nbsp;&nbsp;background-color: #333;<br>
+                &nbsp;&nbsp;color: #fff;<br>
+                &nbsp;&nbsp;font-size: 0.8em;<br>
+                }
+            </code>
+
+            <h3>6. Adding New Blog Posts:</h3>
+            <p>To add a new blog post:</p>
+            <ol>
+                <li>Create a new HTML file in the `posts` folder (e.g., `posts/third-post.html`).</li>
+                <li>Copy the basic structure from an existing post file and modify the content, title, and publication date.</li>
+                <li>On your homepage (`index.html`), add a new `<article class="post-summary">` section linking to your new post file.</li>
+            </ol>
+
+            <h3>Limitations of a Static Blog:</h3>
+            <ul>
+                <li><strong>Manual Updates:</strong> Adding and editing posts requires manually creating and modifying HTML files.</li>
+                <li><strong>No Dynamic Features:</strong> You won't have features like comments, search, categories, or tags without server-side scripting and a database.</li>
+                <li><strong>Scalability:</strong> Managing a large number of posts can become cumbersome.</li>
+            </ul>
+
+            <h3>Moving Beyond Static:</h3>
+            <p>If you want a more dynamic and feature-rich blog, you'll need to explore:</p>
+            <ul>
+                <li><strong>Static Site Generators (SSGs):</strong> Tools like Jekyll, Hugo, and Next.js allow you to write blog posts in Markdown or other formats and automatically generate static HTML files. They often offer features like themes, categories, and basic organization.</li>
+                <li><strong>Content Management Systems (CMS):</strong> Platforms like WordPress, Drupal, and Ghost provide a user-friendly interface for creating, managing, and publishing blog content, along with dynamic features and databases.</li>
+            </ul>
+
+            <h3>In Conclusion:</h3>
+            <p>Building a personal blog with just HTML and CSS is a great learning exercise to understand the fundamental building blocks of the web. While it will be a static site with manual updates, it can still serve as a simple platform to share your thoughts. As your needs grow, you can explore more dynamic solutions. Remember to keep practicing and experimenting!</p>
+        </section>
+
+        <section class="featured-posts">
+            <h2 data-aos="fade-up">Featured Articles</h2>
+            <div class="posts-grid">
+                <article class="post-card" data-aos="fade-up" data-aos-delay="100">
+                    <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1528&q=80" alt="Web Development">
+                    <div class="post-content">
+                        <h3>Learning HTML & CSS Basics</h3>
+                        <p class="post-meta">December 14, 2024 • Web Development</p>
+                        <p>Our first steps into web development at Cebu Eastern Colleges...</p>
+                        <!-- Full content (initially hidden) -->
+                        <div class="full-content">
+                            <p>HTML forms the foundation of every webpage. Think of it as the blueprint of a house, defining the rooms, doors, and windows. Here's a more detailed look:</p>
+
+                            <h2>HTML Key Concepts</h2>
+
+                            <h3>Elements</h3>
+                            <p>The building blocks of HTML documents. They are defined by tags.</p>
+
+                            <h3>Tags</h3>
+                            <p>Keywords enclosed in angle brackets (&lt;&gt;). Most tags come in pairs: an opening tag (e.g., &lt;div&gt;) and a closing tag (e.g., &lt;/div&gt;), with content in between. Some tags are self-closing (e.g., &lt;br&gt;, &lt;hr&gt;, &lt;img src=" "&gt;).</p>
+
+                            <div class="code-example">
+                                &lt;!-- Example of paired tags --&gt;<br>
+                                &lt;p&gt;This is a paragraph.&lt;/p&gt;<br><br>
+
+                                &lt;!-- Example of self-closing tag --&gt;<br>
+                                &lt;img src="image.jpg" alt="Description"&gt;
+                            </div>
+
+                            <h3>Attributes</h3>
+                            <p>Provide additional information about HTML elements. They are specified within the opening tag and consist of a name and a value (e.g., &lt;img src="image.jpg" alt="My Image"&gt;). Common attributes include id, class, style, src, href, alt, etc.</p>
+
+                            <h3>Document Structure</h3>
+                            <p>A basic HTML document has a specific structure:</p>
+
+                            <div class="code-example">
+                                &lt;!DOCTYPE html&gt;<br>
+                                &lt;html&gt;<br>
+                                &nbsp;&nbsp;&lt;head&gt;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&lt;title&gt;Page Title&lt;/title&gt;<br>
+                                &nbsp;&nbsp;&lt;/head&gt;<br>
+                                &nbsp;&nbsp;&lt;body&gt;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&lt;h1&gt;My First Heading&lt;/h1&gt;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;My first paragraph.&lt;/p&gt;<br>
+                                &nbsp;&nbsp;&lt;/body&gt;<br>
+                                &lt;/html&gt;
+                            </div>
+
+                            <ul>
+                                <li><strong>&lt;!DOCTYPE html&gt;:</strong> Declares the document type as HTML5.</li>
+                                <li><strong>&lt;html&gt;:</strong> The root element of the HTML page.</li>
+                                <li><strong>&lt;head&gt;:</strong> Contains meta-information about the HTML document, such as the title, character set, links to CSS files, and scripts. This information is generally not displayed on the page itself.</li>
+                                <li><strong>&lt;title&gt;:</strong> Specifies the title that appears in the browser tab or window title bar.</li>
+                                <li><strong>&lt;meta&gt;:</strong> Provides metadata about the HTML document (e.g., character encoding, viewport settings, keywords).</li>
+                                <li><strong>&lt;body&gt;:</strong> Contains the visible page content (text, images, links, etc.).</li>
+                            </ul>
+
+                            <h3>Semantic HTML</h3>
+                            <p>Using HTML tags according to their meaning. For example, using &lt;article&gt; for a self-contained composition, &lt;nav&gt; for navigation menus, and &lt;aside&gt; for content related to the main content. This improves SEO, accessibility, and code readability.</p>
+
+                            <div class="note">
+                                <strong>Pro Tip:</strong> Always prefer semantic HTML elements over generic &lt;div&gt; elements when possible. It makes your code more meaningful and accessible.
+                            </div>
+
+                            <h2>Common HTML Elements</h2>
+
+                            <ul>
+                                <li><strong>Text Formatting:</strong> &lt;h1&gt; to &lt;h6&gt; (headings), &lt;p&gt; (paragraph), &lt;strong&gt; (strong emphasis), &lt;em&gt; (emphasis), &lt;span&gt; (inline container).</li>
+                                <li><strong>Lists:</strong> &lt;ul&gt; (unordered list), &lt;ol&gt; (ordered list), &lt;li&gt; (list item), &lt;dl&gt; (description list), &lt;dt&gt; (description term), &lt;dd&gt; (description description).</li>
+                                <li><strong>Links:</strong> &lt;a&gt; (anchor tag) for creating hyperlinks using the href attribute.</li>
+                                <li><strong>Images:</strong> &lt;img&gt; for embedding images using the src attribute.</li>
+                                <li><strong>Tables:</strong> &lt;table&gt;, &lt;tr&gt; (table row), &lt;th&gt; (table header), &lt;td&gt; (table data cell).</li>
+                                <li><strong>Forms:</strong> &lt;form&gt;, &lt;input&gt;, &lt;textarea&gt;, &lt;button&gt;, &lt;select&gt;, &lt;option&gt;, etc., for creating interactive forms.</li>
+                                <li><strong>Divisions and Spans:</strong> &lt;div&gt; (block-level container), &lt;span&gt; (inline container) used for structuring and styling content.</li>
+                                <li><strong>Semantic Elements:</strong> &lt;article&gt;, &lt;aside&gt;, &lt;nav&gt;, &lt;header&gt;, &lt;footer&gt;, &lt;section&gt;, etc., for providing meaning to the structure of the document.</li>
+                            </ul>
+
+                            <h2>Exploring CSS in Detail</h2>
+
+                            <p>CSS is the styling language that controls the visual presentation of HTML elements. It's like the interior designer and decorator of our webpage house, determining the colors, fonts, layout, and overall look and feel.</p>
+
+                            <h3>Key CSS Concepts</h3>
+
+                            <h4>Selectors</h4>
+                            <p>Patterns used to select the HTML elements you want to style. Common selectors include:</p>
+                            <ul>
+                                <li><strong>Element Selectors:</strong> Select all elements of a specific type (e.g., p, h1, div).</li>
+                                <li><strong>ID Selectors:</strong> Select a single element based on its unique id attribute (e.g., #my-heading).</li>
+                                <li><strong>Class Selectors:</strong> Select all elements with a specific class attribute (e.g., .button).</li>
+                                <li><strong>Attribute Selectors:</strong> Select elements based on their attributes or attribute values (e.g., [type="text"], a[href="example"]).</li>
+                                <li><strong>Pseudo-classes:</strong> Select elements based on their state or position (e.g., :hover, :first-child, :nth-child(even)).</li>
+                                <li><strong>Pseudo-elements:</strong> Creates virtual elements within an existing element for styling specific parts (e.g., ::before, ::after).</li>
+                            </ul>
+
+                            <div class="code-example">
+                                /* Element selector */<br>
+                                p { color: blue; }<br><br>
+
+                                /* Class selector */<br>
+                                .highlight { background-color: yellow; }<br><br>
+
+                                /* ID selector */<br>
+                                #main-header { font-size: 2rem; }<br><br>
+
+                                /* Attribute selector */<br>
+                                input[type="text"] { border: 1px solid #ccc; }<br><br>
+
+                                /* Pseudo-class */<br>
+                                a:hover { text-decoration: underline; }<br><br>
+
+                                /* Pseudo-element */<br>
+                                p::first-line { font-weight: bold; }
+                            </div>
+
+                            <h4>Properties and Values</h4>
+                            <ul>
+                                <li><strong>Properties:</strong> Define the visual characteristics you want to change (e.g., color, font-size, background-color, width, height).</li>
+                                <li><strong>Values:</strong> Specify the settings for CSS properties (e.g., red, 16px, lightblue, 100%, auto).</li>
+                            </ul>
+
+                            <h4>Ruleset (or Rule)</h4>
+                            <p>A combination of a selector and one or more declarations (property-value pairs) enclosed in curly braces {}.</p>
+
+                            <h4>Cascading</h4>
+                            <p>The "C" in CSS stands for Cascading. This refers to how styles are applied when multiple rules target the same element. Styles from different sources (browser defaults, external stylesheets, internal styles, inline styles) are applied based on specificity and order.</p>
+
+                            <h4>Specificity</h4>
+                            <p>Determines which CSS rule takes precedence when multiple rules apply to the same element. More specific selectors override less specific ones (e.g., an ID selector is more specific than a class selector, which is more specific than an element selector).</p>
+
+                            <h4>Inheritance</h4>
+                            <p>Some CSS properties are inherited from parent elements to their children (e.g., font-family, color). However, not all properties are inherited (e.g., border, padding, margin).</p>
+
+                            <h3>Box Model</h3>
+                            <p>A fundamental concept in CSS that describes the rectangular boxes that are generated for HTML elements. It consists of:</p>
+                            <ul>
+                                <li><strong>Content:</strong> The actual content of the element (text, images, etc.).</li>
+                                <li><strong>Padding:</strong> Space around the content, inside the border.</li>
+                                <li><strong>Border:</strong> A line surrounding the padding and content.</li>
+                                <li><strong>Margin:</strong> Space outside the border, separating the element from other elements.</li>
+                            </ul>
+
+                            <div class="note">
+                                <strong>Remember:</strong> When calculating the total width of an element, you need to add content + padding + border. Margins are not included in the element's width.
+                            </div>
+
+                            <h3>Layout Models</h3>
+                            <p>CSS provides different layout models to arrange elements on a page:</p>
+                            <ul>
+                                <li><strong>Normal Flow:</strong> Elements are laid out in the order they appear in the HTML source. Block-level elements take up the full width available and stack vertically, while inline elements flow horizontally within their parent.</li>
+                                <li><strong>Flexbox (Flexible Box Layout):</strong> A powerful one-dimensional layout model for arranging items in rows or columns. It's excellent for aligning and distributing space among items within a container.</li>
+                                <li><strong>Grid Layout:</strong> A two-dimensional layout model for creating complex, grid-based layouts with rows and columns. It offers more control over positioning elements in both dimensions.</li>
+                                <li><strong>Positioning:</strong> Allows you to control the placement of elements on the page using the position property (e.g., static, relative, absolute, fixed, sticky).</li>
+                                <li><strong>Float:</strong> Used to position and wrap text around elements (though often superseded by Flexbox and Grid for more complex layouts).</li>
+                            </ul>
+
+                            <h3>Responsiveness</h3>
+                            <p>Designing websites that adapt and display well on different screen sizes and devices. Techniques include:</p>
+                            <ul>
+                                <li><strong>Media Queries:</strong> Allow you to apply different CSS rules based on screen width, height, device orientation, etc. (@media screen and (max-width: 768px) { ... }).</li>
+                                <li><strong>Fluid Layouts:</strong> Using percentage-based widths and heights instead of fixed pixel values.</li>
+                                <li><strong>Flexible Images and Videos:</strong> Ensuring media scales appropriately.</li>
+                                <li><strong>Mobile-First Approach:</strong> Designing for smaller screens first and then progressively enhancing for larger screens.</li>
+                            </ul>
+
+                            <div class="code-example">
+                                /* Mobile-first media query */<br>
+                                .container {<br>
+                                &nbsp;&nbsp;width: 100%;<br>
+                                &nbsp;&nbsp;padding: 10px;<br>
+                                }<br><br>
+
+                                @media (min-width: 768px) {<br>
+                                &nbsp;&nbsp;.container {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;width: 750px;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;margin: 0 auto;<br>
+                                &nbsp;&nbsp;}<br>
+                                }
+                            </div>
+
+                            <h2>In Summary</h2>
+
+                            <p>HTML provides the structure and meaning of your web content, while CSS handles the visual presentation and layout. Mastering both is crucial for creating well-structured, visually appealing, and user-friendly websites. They work together harmoniously, with HTML defining what the content is and CSS defining how it looks. Understanding their individual roles and how they interact is the key to effective web development.</p>
+
+                            <p>As IT students at Cebu Eastern Colleges, we've found that practicing these concepts by building small projects is the best way to solidify our understanding. Start with simple pages and gradually add more complex elements and styling as you become more comfortable with the basics.</p>
+                        </div>
+
+                        <button class="read-more-btn">
+                            Read More <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                </article>
+
+                <article class="post-card" data-aos="fade-up" data-aos-delay="200">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80" alt="Student Life">
+                    <div class="post-content">
+                        <h3>Balancing School & Projects</h3>
+                        <p class="post-meta">February 15, 2025 • Student Life</p>
+                        <p>How we manage our time between academics and personal projects...</p>
+
+                        <!-- Full content (initially hidden) -->
+                        <div class="full-content">
+                            <p>Balancing school and projects as an IT student requires a strategic approach to time management, organization, and self-care. Here's a breakdown of how to achieve this balance:</p>
+
+                            <h3>1. Time Management is Key</h3>
+
+                            <h4>Create a Master Schedule</h4>
+                            <p>Use a calendar or planner (digital or physical) to map out all your commitments: classes, assignments, exams, project deadlines, work (if applicable), social events, and personal time. Color-coding can help distinguish between different types of activities.</p>
+
+                            <h4>Prioritize Tasks</h4>
+                            <p>Understand the difference between urgent and important tasks. Focus on high-priority items first, such as assignments with earlier deadlines or those that are worth more marks. Use methods like the Eisenhower Matrix (urgent/important) to help.</p>
+
+                            <div class="highlight-box">
+                                <strong>Pro Tip:</strong> We use Google Calendar with color coding - blue for classes, red for deadlines, green for personal time. This visual system helps us see our week at a glance.
+                            </div>
+
+                            <h4>Time Blocking</h4>
+                            <p>Allocate specific blocks of time for studying, working on projects, and other activities. Treat these blocks like appointments and stick to them as much as possible.</p>
+
+                            <h4>Break Down Large Tasks</h4>
+                            <p>Divide big projects into smaller, more manageable steps with their own mini-deadlines. This makes the overall task less daunting and helps you track progress.</p>
+
+                            <h4>Start Early</h4>
+                            <p>Don't wait until the last minute to begin assignments or projects. Starting early reduces stress and allows for unexpected delays.</p>
+
+                            <h3>2. Organization is Crucial</h3>
+
+                            <ul>
+                                <li><strong>Keep Everything in One Place:</strong> Whether it's a physical binder or a digital system, organize your notes, assignments, project files, and deadlines in a way that's easy to access.</li>
+                                <li><strong>Use Project Management Tools:</strong> We recommend Trello for visual task management or Notion for all-in-one organization.</li>
+                                <li><strong>Note-Taking Strategies:</strong> Develop a consistent system for class notes. We use the Cornell method for important lectures.</li>
+                                <li><strong>Maintain a Clean Workspace:</strong> A clutter-free environment helps maintain focus. We do a 5-minute cleanup at the end of each study session.</li>
+                            </ul>
+
+                            <h3>3. Project-Specific Strategies</h3>
+
+                            <ul>
+                                <li><strong>Understand Requirements:</strong> Before starting, make sure you fully understand what's expected. We create a checklist of deliverables.</li>
+                                <li><strong>Create a Project Plan:</strong> Break the project into phases with milestones. For coding projects, we use GitHub Projects to track progress.</li>
+                                <li><strong>Regular Communication:</strong> For group projects, set weekly check-ins. We use Discord for quick communication between meetings.</li>
+                                <li><strong>Version Control:</strong> Essential for coding projects. We commit code daily with descriptive messages.</li>
+                            </ul>
+
+                            <div class="highlight-box">
+                                <strong>Our Workflow:</strong> We dedicate Wednesday evenings and Sunday afternoons specifically for project work. This consistent schedule helps us make steady progress.
+                            </div>
+
+                            <h3>4. Self-Care is Essential</h3>
+
+                            <p>You can't pour from an empty cup. Here's what works for us:</p>
+                            <ul>
+                                <li><strong>Sleep:</strong> We aim for 7-8 hours nightly, even during busy periods.</li>
+                                <li><strong>Nutrition:</strong> Meal prepping on Sundays ensures we eat well during the week.</li>
+                                <li><strong>Exercise:</strong> Even short walks between study sessions make a difference.</li>
+                                <li><strong>Downtime:</strong> We schedule guilt-free breaks for gaming or watching shows.</li>
+                            </ul>
+
+                            <h3>5. Leverage Resources</h3>
+
+                            <p>Don't try to do everything alone:</p>
+                            <ul>
+                                <li>Form study groups with classmates</li>
+                                <li>Visit professors during office hours</li>
+                                <li>Use campus resources like tutoring centers</li>
+                                <li>Connect with upperclassmen for advice</li>
+                            </ul>
+
+                            <p>By implementing these strategies, we've been able to maintain good grades while working on personal projects that enhance our skills. Remember that balance looks different for everyone - experiment to find what works best for you!</p>
+                        </div>
+
+                        <button class="read-more-btn">
+                            Read More <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                </article>
+
+                <article class="post-card" data-aos="fade-up" data-aos-delay="300">
+                    <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1528&q=80" alt="Coding">
+                    <div class="post-content">
+                        <h3>Building Our First Website</h3>
+                        <p class="post-meta">March 06, 2025 • Projects</p>
+                        <p>The story behind creating this blog and what we learned...</p>
+
+                        <!-- Full content (initially hidden) -->
+                        <div class="full-content">
+                            <p>That's exciting! Building your first website with HTML is a fundamental step into the world of web development. Here's a breakdown of the essential steps and concepts to get you started:</p>
+
+                            <h3>1. Setting Up Your Environment:</h3>
+
+                            <p><strong>Text Editor:</strong> You'll need a plain text editor to write your HTML code. Here are some popular (and often free) options:</p>
+                            <ul>
+                                <li><strong>Beginner-Friendly:</strong> Notepad (Windows), TextEdit (Mac - make sure to save as plain text), Sublime Text, VS Code (Visual Studio Code), Atom.</li>
+                                <li><strong>Recommended for Beginners:</strong> VS Code is highly recommended due to its helpful features like syntax highlighting, auto-completion, and integrated terminal.</li>
+                            </ul>
+
+                            <p><strong>Web Browser:</strong> You'll need a web browser (like Chrome, Firefox, Safari, Edge) to view the HTML files you create.</p>
+
+                            <h3>2. Creating Your First HTML File:</h3>
+
+                            <ol>
+                                <li><strong>Open your text editor.</strong></li>
+                                <li><strong>Write the basic HTML structure:</strong> Every HTML document starts with a specific structure. Copy and paste this into your editor:</li>
+                            </ol>
+
+                            <code>
+                                &lt;!DOCTYPE html&gt;<br>
+                                &lt;html lang="en"&gt;<br>
+                                &lt;head&gt;<br>
+                                &nbsp;&nbsp;&lt;meta charset="UTF-8"&gt;<br>
+                                &nbsp;&nbsp;&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;<br>
+                                &nbsp;&nbsp;&lt;title&gt;My First Website&lt;/title&gt;<br>
+                                &lt;/head&gt;<br>
+                                &lt;body&gt;<br>
+                                &nbsp;&nbsp;&lt;h1&gt;Hello, World!&lt;/h1&gt;<br>
+                                &nbsp;&nbsp;&lt;p&gt;This is my first website built with HTML.&lt;/p&gt;<br>
+                                &lt;/body&gt;<br>
+                                &lt;/html&gt;
+                            </code>
+
+                            <ol start="3">
+                                <li><strong>Save the file:</strong></li>
+                            </ol>
+                            <ul>
+                                <li>Go to `File` > `Save As...`</li>
+                                <li>Choose a location on your computer where you want to save the file.</li>
+                                <li><strong>Crucially, name the file with the `.html` extension.</strong> For your main page, it's common to name it `index.html`.</li>
+                                <li>Make sure the "Save as type" or "Format" is set to "All Files" or "Plain Text" (depending on your editor).</li>
+                            </ul>
+
+                            <h3>3. Understanding the Basic HTML Structure:</h3>
+
+                            <ul>
+                                <li><strong>&lt;!DOCTYPE html&gt;:</strong> This declaration defines the document type to be HTML5. It's the very first thing in your HTML document.</li>
+                                <li><strong>&lt;html lang="en"&gt;:</strong> This is the root element of the HTML page. The `lang="en"` attribute specifies the language of the document as English.</li>
+                                <li><strong>&lt;head&gt;:</strong> This section contains meta-information about the HTML document, which is not displayed on the page itself.</li>
+                                <ul>
+                                    <li><strong>&lt;meta charset="UTF-8"&gt;:</strong> Specifies the character encoding for the document, which is usually UTF-8 for broad character support.</li>
+                                    <li><strong>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;:</strong> Configures the viewport for responsive design, ensuring your website looks good on different screen sizes.</li>
+                                    <li><strong>&lt;title&gt;My First Website&lt;/title&gt;:</strong> Sets the title that appears in the browser tab or window title bar.</li>
+                                </ul>
+                                <li><strong>&lt;body&gt;:</strong> This section contains all the visible content of your webpage.</li>
+                                <ul>
+                                    <li><strong>&lt;h1&gt;Hello, World!&lt;/h1&gt;:</strong> This is a level 1 heading. HTML has six levels of headings (`&lt;h1&gt;` to `&lt;h6&gt;`).</li>
+                                    <li><strong>&lt;p&gt;This is my first website built with HTML.&lt;/p&gt;:</strong> This is a paragraph of text.</li>
+                                </ul>
+                            </ul>
+
+                            <h3>4. Viewing Your Website:</h3>
+
+                            <ol>
+                                <li><strong>Locate the `index.html` file</strong> you saved on your computer.</li>
+                                <li><strong>Double-click the file.</strong> This will open it in your default web browser.</li>
+                            </ol>
+
+                            <p>You should now see a simple webpage with the heading "Hello, World!" and the paragraph "This is my first website built with HTML."</p>
+
+                            <h3>5. Adding More Content and Structure:</h3>
+
+                            <p>Now, let's add some more common HTML elements to build out your website:</p>
+
+                            <ul>
+                                <li><strong>Headings:</strong> Use `&lt;h1&gt;` to `&lt;h6&gt;` for different levels of headings.</li>
+                                <li><strong>Paragraphs:</strong> Use `&lt;p&gt;` for blocks of text.</li>
+                                <li><strong>Links:</strong> Use the `&lt;a&gt;` (anchor) tag to create hyperlinks. The `href` attribute specifies the link destination.</li>
+                            </ul>
+
+                            <code>
+                                &lt;a href="https://www.google.com" target="_blank"&gt;Visit Google&lt;/a&gt;
+                            </code>
+
+                            <ul>
+                                <li><strong>href:</strong> The URL of the page you want to link to.</li>
+                                <li><strong>target="_blank":</strong> Opens the link in a new browser tab.</li>
+                            </ul>
+
+                            <ul>
+                                <li><strong>Images:</strong> Use the `&lt;img&gt;` tag to embed images. The `src` attribute specifies the path to the image file, and the `alt` attribute provides alternative text if the image cannot be displayed.</li>
+                            </ul>
+
+                            <code>
+                                &lt;img src="your-image.jpg" alt="Description of the image"&gt;
+                            </code>
+
+                            <ul>
+                                <li>Make sure `your-image.jpg` is in the same folder as your `index.html` file, or provide the correct path to the image.</li>
+                            </ul>
+
+                            <ul>
+                                <li><strong>Lists:</strong></li>
+                                <ul>
+                                    <li><strong>Unordered List (`&lt;ul&gt;`):</strong> Creates a bulleted list.</li>
+                                    <li><strong>Ordered List (`&lt;ol&gt;`):</strong> Creates a numbered list.</li>
+                                    <li><strong>List Items (`&lt;li&gt;`):</strong> Used inside `&lt;ul&gt;` or `&lt;ol&gt;` to represent individual items.</li>
+                                </ul>
+                            </ul>
+
+                            <code>
+                                &lt;ul&gt;<br>
+                                &nbsp;&nbsp;&lt;li&gt;Item 1&lt;/li&gt;<br>
+                                &nbsp;&nbsp;&lt;li&gt;Item 2&lt;/li&gt;<br>
+                                &nbsp;&nbsp;&lt;li&gt;Item 3&lt;/li&gt;<br>
+                                &lt;/ul&gt;<br><br>
+
+                                &lt;ol&gt;<br>
+                                &nbsp;&nbsp;&lt;li&gt;First step&lt;/li&gt;<br>
+                                &nbsp;&nbsp;&lt;li&gt;Second step&lt;/li&gt;<br>
+                                &nbsp;&nbsp;&lt;li&gt;Third step&lt;/li&gt;<br>
+                                &lt;/ol&gt;
+                            </code>
+
+                            <ul>
+                                <li><strong>Divisions (`&lt;div&gt;`):</strong> A generic container element used to group other HTML elements for styling or layout purposes.</li>
+                                <li><strong>Spans (`&lt;span&gt;`):</strong> An inline container element used to group small pieces of text or other inline elements for styling.</li>
+                            </ul>
+
+                            <h3>6. Next Steps:</h3>
+
+                            <ul>
+                                <li><strong>Experiment:</strong> Try adding different HTML elements and see how they are displayed in your browser.</li>
+                                <li><strong>Learn More Tags:</strong> Explore other HTML tags and their attributes. Refer to online documentation like the MDN Web Docs (Mozilla Developer Network).</li>
+                                <li><strong>Introduction to CSS:</strong> Once you have a basic understanding of HTML, the next crucial step is to learn CSS (Cascading Style Sheets). CSS is used to style the appearance of your HTML elements (colors, fonts, layout, etc.). You can link external CSS files to your HTML or embed CSS directly within the `&lt;style&gt;` tags in the `&lt;head&gt;` section.</li>
+                            </ul>
+
+                            <h3>Example of Adding Basic CSS (within `&lt;style&gt;` tags in the `&lt;head&gt;`):</h3>
+
+                            <code>
+                                &lt;!DOCTYPE html&gt;<br>
+                                &lt;html lang="en"&gt;<br>
+                                &lt;head&gt;<br>
+                                &nbsp;&nbsp;&lt;meta charset="UTF-8"&gt;<br>
+                                &nbsp;&nbsp;&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;<br>
+                                &nbsp;&nbsp;&lt;title&gt;My First Website with Basic Styling&lt;/title&gt;<br>
+                                &nbsp;&nbsp;&lt;style&gt;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;body {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;font-family: sans-serif;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;background-color: #f0f0f0;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin: 0;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;padding: 20px;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;h1 {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;color: blue;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text-align: center;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;p {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;line-height: 1.5;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                &nbsp;&nbsp;&lt;/style&gt;<br>
+                                &lt;/head&gt;<br>
+                                &lt;body&gt;<br>
+                                &nbsp;&nbsp;&lt;h1&gt;Welcome to My Styled Website!&lt;/h1&gt;<br>
+                                &nbsp;&nbsp;&lt;p&gt;This paragraph has some basic styling applied using CSS.&lt;/p&gt;<br>
+                                &nbsp;&nbsp;&lt;a href="https://www.example.com" target="_blank"&gt;Check out Example.com&lt;/a&gt;<br>
+                                &lt;/body&gt;<br>
+                                &lt;/html&gt;
+                            </code>
+
+                            <p>Building your first website is a journey. Start with the basics, experiment, and gradually learn more complex concepts. Don't be afraid to make mistakes – they are part of the learning process! Good luck!</p>
+                        </div>
+
+                        <button class="read-more-btn">
+                            Read More <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Sean & Kerve. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Use</a>
+                <a href="#" onclick="showContactInfo()">Contact Us</a>
+            </div>
+            <div class="footer-contact" id="footer-contact" style="display: none;">
+                <p>Email: <a href="mailto:spantonial2@gmail.com">spantonial2@gmail.com</a></p>
+                <p>Phone: <a href="tel:+639617147283">+63 961 714 7283</a></p>
+                <p>Email: <a href="mailto:kerveministerio@gmail.com">kerveministerio@gmail.com</a></p>
+                <p>Phone: <a href="tel:+639127786391">+63 912 778 6391</a></p>
             </div>
         </div>
-    </section>
-
-    <!-- About Section -->
-    <div class="about-section" id="aboutSection">
-        <h2>About W3Schools</h2>
-        <p>W3Schools is a popular online educational website that provides free tutorials and references for learning web development technologies. Here's a breakdown of what it offers:</p>
-        <ul>
-            <li>Focus on Web Technologies:
-                <ul>
-                    <li>It covers a wide range of programming languages and web development technologies, including HTML, CSS, JavaScript, Python, SQL, and more.</li>
-                </ul>
-            </li>
-            <li>Tutorials and Examples:
-                <ul>
-                    <li>W3Schools provides easy-to-understand tutorials with practical code examples, making it accessible for beginners.</li>
-                </ul>
-            </li>
-            <li>"Try It" Editor:
-                <ul>
-                    <li>A key feature is its "Try It" editor, which allows users to modify and run code examples directly in their web browser.</li>
-                </ul>
-            </li>
-            <li>Freemium Model:
-                <ul>
-                    <li>While most of its content is available for free, W3Schools also offers a paid "PRO" version that removes ads and provides additional features.</li>
-                </ul>
-            </li>
-            <li>Not Affiliated with W3C:
-                <ul>
-                    <li>It's important to note that although it shares a similar name, W3Schools is not affiliated with the World Wide Web Consortium (W3C), the international standards organization for the World Wide Web.</li>
-                </ul>
-            </li>
-        </ul>
-        <p>In essence, W3Schools serves as a valuable resource for anyone looking to learn or enhance their web development skills.</p>
-    </div>
+    </footer>
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
-      AOS.init({offset:0});
+        AOS.init({offset: 0});
 
-      function toggleAboutSection() {
-          const aboutSection = document.getElementById('aboutSection');
-          if (aboutSection.style.display === 'none' || aboutSection.style.display === '') {
-              aboutSection.style.display = 'block';
-          } else {
-              aboutSection.style.display = 'none';
-          }
-      }
-    </script>
-    <script>
-        function hamburg(){
-            const navbar = document.querySelector(".dropdown")
-            navbar.style.transform = "translateY(0px)"
+        function hamburg() {
+            const navbar = document.querySelector(".dropdown");
+            navbar.style.transform = "translateY(0)";
         }
-        function cancel(){
-            const navbar = document.querySelector(".dropdown")
-            navbar.style.transform = "translateY(-500px)"
+
+        function cancel() {
+            const navbar = document.querySelector(".dropdown");
+            navbar.style.transform = "translateY(-100%)";
         }
+
+        // Function to show the hidden section
+        function showHiddenSection() {
+            const section = document.getElementById('hidden-section');
+            if (section.style.display === 'none' || section.style.display === '') {
+                section.style.display = 'block';
+            } else {
+                section.style.display = 'none';
+            }
+        }
+
+        // Function to show contact information
+        function showContactInfo() {
+            const contactInfo = document.getElementById('footer-contact');
+            if (contactInfo.style.display === 'none' || contactInfo.style.display === '') {
+                contactInfo.style.display = 'block';
+            } else {
+                contactInfo.style.display = 'none';
+            }
+        }
+
+        // Toggle expanded content
+        document.querySelectorAll('.read-more-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const postCard = this.closest('.post-card');
+                postCard.classList.toggle('expanded');
+
+                // Change button text and icon
+                if (postCard.classList.contains('expanded')) {
+                    this.innerHTML = 'Read Less <i class="fas fa-chevron-up"></i>';
+                    // Scroll to show more content if needed
+                    this.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                } else {
+                    this.innerHTML = 'Read More <i class="fas fa-chevron-down"></i>';
+                }
+            });
+        });
     </script>
 </body>
 </html>
+
